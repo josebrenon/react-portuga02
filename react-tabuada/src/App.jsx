@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 export default function App() {
-  const [num, setNum] = useState(1);
+  const [valor, setValor] = useState(1);
 
   const multiplicar = () => {
-    if (isNaN(num)) return [];
+    if (isNaN(valor)) return [];
+
     let produtos = [];
-    for (let m = 1; m <= 10; m++) {
-      produtos.push(`${num} x ${m} = ${num * m}`);
+    for (let n = 1; n <= 10; n++) {
+      produtos.push(`${valor} x ${n} = ${valor * n}`);
     }
     return produtos;
   };
@@ -16,15 +17,18 @@ export default function App() {
     <>
       <h1>React Tabuada</h1>
       <hr />
+
       <input
         type="number"
+        onChange={(e) => {
+          setValor(parseInt(e.target.value));
+        }}
+        value={valor}
         placeholder="Digite um número"
-        value={num}
-        onChange={(e) => setNum(parseInt(e.target.value))}
       />
-      {multiplicar().map((item) => {
-        return <p key={item}>{item}</p>;
-      })}
+      {multiplicar().map((item) => (
+        <p key={item}>{item}</p>
+      ))}
     </>
   );
 }
